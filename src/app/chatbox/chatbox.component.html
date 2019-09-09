@@ -1,0 +1,18 @@
+<div class="chatbox-container">
+  <div class="chatbox-header">
+    <mat-card>Simple Chat Box</mat-card>
+  </div>
+  <div class="chatbox-body" style="overflow-y: scroll;">
+    <app-botmessage></app-botmessage>
+    <!-- <app-message></app-message> -->
+    <div *ngFor="let message of userMessages">
+        <app-message [message]="message.text" *ngIf="message.type=='user'"></app-message>
+        <app-botmessage [message]="message.text" *ngIf="message.type=='bot'"></app-botmessage>
+    </div>
+  </div>
+  <div class="chatbox-footer">
+    <mat-card>
+      <app-chatinput (onChange)="handleUserMesage($event)"></app-chatinput>
+    </mat-card>
+  </div>
+</div>

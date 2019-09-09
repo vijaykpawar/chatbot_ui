@@ -1,0 +1,21 @@
+.pill {
+  padding: 0.5rem;
+  border-radius: 25px;
+  &.primary {
+    background-color: blue;
+    span {
+        color: white;
+      
+    }
+  }
+
+  &.secondary {
+    background-color: white;
+    border: 1px solid lightgray;
+    span {
+        color: #000;
+      
+    }
+  }
+  
+}
