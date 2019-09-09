@@ -19,15 +19,13 @@ import { BotmessageComponent } from './botmessage/botmessage.component';
 import { MessageComponent } from './message/message.component';
 import { PillComponent } from './pill/pill.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { WebSpeechComponent } from './web-speech/web-speech.component';
+import { SharedModule } from './shared/shared.module';
+import { WebSpeechModule } from './web-speech/web-speech.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ChatboxComponent,
-    ChatinputComponent,
-    BotmessageComponent,
-    MessageComponent,
-    PillComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +37,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatInputModule,
     MatChipsModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule,
+    WebSpeechModule
+    
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]
