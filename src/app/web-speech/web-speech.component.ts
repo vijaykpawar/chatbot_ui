@@ -21,9 +21,6 @@ export class WebSpeechComponent implements OnInit {
   actionContext: ActionContext = new ActionContext();
   openChatBox:boolean = false;
 
-  @Output() ratingClicked: EventEmitter<string> =
-        new EventEmitter<string>();
-
   constructor(private changeDetector: ChangeDetectorRef,
               private speechRecognizer: SpeechRecognizerService,
               private httpSer: HttpClient

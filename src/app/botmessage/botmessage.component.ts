@@ -5,11 +5,11 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
   templateUrl: './botmessage.component.html',
   styleUrls: ['./botmessage.component.scss']
 })
-export class BotmessageComponent implements OnInit , OnChanges {
+export class BotmessageComponent implements OnInit  {
 
   @Input() message: string = 'Hello'
 
-  @Input() msg: string;
+  
 
   constructor() { }
 
@@ -17,9 +17,6 @@ export class BotmessageComponent implements OnInit , OnChanges {
 
   }
 
-  ngOnChanges(): void {
-    console.log("msg from parent ::"+this.msg);
-  }
 
   ngOnInit() {
   }
