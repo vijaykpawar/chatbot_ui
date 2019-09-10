@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-chatinput',
@@ -6,18 +6,42 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./chatinput.component.scss']
 })
 export class ChatinputComponent implements OnInit {
+  @Output() onChange = new EventEmitter();
+  @Output() click = new EventEmitter();
+
+
+  @Input() finalTranscript: string = '';
+  
 
   constructor() { }
-  userValue=''
+  userValue='';
+  //finalTranscript='';
+  childVaue = this.finalTranscript;
 
-  @Output() onChange = new EventEmitter();
+  
 
-  ngOnInit() {
+  
+
+  ngOnInit() {  
+    console.log('Inside chat input =', this.finalTranscript);
   }
   
   handleSubmit(event) {
-    this.onChange.emit(this.userValue);
-    this.userValue = '';
+    if (this.finalTranscript) {
+      console.log('Emiiting voice value')
+      this.click.emit(this.finalTranscript);
+      this.finalTranscript = '';
+    }
+    else {
+      this.onChange.emit(this.userValue);
+      this.userValue = '';
+    }
+
+  }
+
+  onClickMat(finalTranscript) {
+    this.finalTranscript =  finalTranscript;
+    
   }
 
 }

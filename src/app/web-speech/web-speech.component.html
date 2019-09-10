@@ -1,43 +1,45 @@
-<div class="center">
-  <mat-form-field>
-    <mat-select placeholder="Select your language"
-                [(ngModel)]="currentLanguage" [disabled]="recognizing">
-      <mat-option *ngFor="let language of languages" [value]="language" (click)="onSelectLanguage(language)">
-        {{language}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<div>
+    <img src="assets/img/TERA.gif" alt="image">
 </div>
 
-<div class="center">
-  <button mat-fab (click)="startButton($event)">
-    <mat-icon *ngIf="!recognizing">mic</mat-icon>
-    <mat-icon *ngIf="recognizing">stop</mat-icon>
+
+<div class="chatbox-fab">
+  <button (click)="toggleChatBox($event)"
+  mat-fab aria-label="Example icon-button with a heart icon">
+    +
   </button>
 </div>
 
-<form>
-  <mat-form-field class="speech-result-width">
-    <textarea matInput [value]="finalTranscript" placeholder="Speech Input Result" rows="15" disabled="true"></textarea>
-  </mat-form-field>
-</form>
+<div *ngIf="openChatBox">
+  <div class="chatbox-container">
 
-<mat-card *ngIf="notification" class="notification">{{notification}}</mat-card>
-<div class="chatbox-container">
-  <div class="chatbox-header">
-    <mat-card>Trade Enable Robotic Assistance</mat-card>
-  </div>
-  <div class="chatbox-body" style="overflow-y: scroll;">
-    <app-botmessage></app-botmessage>
-    <!-- <app-message></app-message> -->
-    <div *ngFor="let message of userMessages">
+    <div class="chatbox-header">
+      <mat-card>Trade Enable Robotic Assistance</mat-card>
+    </div>
+
+
+
+    <div class="chatbox-body">
+      <app-botmessage></app-botmessage>
+      <div *ngFor="let message of userMessages">
         <app-message [message]="message.text" *ngIf="message.type=='user'"></app-message>
         <app-botmessage [message]="message.text" *ngIf="message.type=='bot'"></app-botmessage>
+      </div>
+    </div>
+
+
+    <div class="chatbox-footer">
+      <mat-card>
+        <app-chatinput (onChange)="handleUserMesage($event)"></app-chatinput>
+      </mat-card>
     </div>
   </div>
-  <div class="chatbox-footer">
-    <mat-card>
-      <app-chatinput (onChange)="handleUserMesage($event)"></app-chatinput>
-    </mat-card>
-  </div>
 </div>
+
+<div class="mic-style" *ngIf="openChatBox">
+    <button mat-fab (click)="startButton($event)">
+        <mat-icon *ngIf="!recognizing">mic</mat-icon>
+        <mat-icon *ngIf="recognizing" >stop</mat-icon>
+      </button>
+</div>
+<mat-card *ngIf="notification" class="notification">{{notification}}</mat-card>

@@ -10,6 +10,7 @@ export class AppComponent {
   openChatBox:boolean = false;
 
   toggleChatBox(event) {
+    console.log('I am clicked')
     this.openChatBox = !this.openChatBox;
   }
 }

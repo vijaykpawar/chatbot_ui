@@ -1,8 +1,13 @@
 <div class="chat-input">
   <form class="example-form" (submit)="handleSubmit($event)">
     <mat-form-field class="full-width">
-      <input [(ngModel)]="userValue" name="user-input" matInput
-        placeholder="What do need help with?" value="">
+      <input id="finalTranscript"
+        [(ngModel)]="finalTranscript" name="user-input" matInput
+        placeholder="Tera is listening you ...!!!" value="">
+
+<!--         <input *ngIf = "finalTranscript == 'undefined' || finalTranscript == null "
+        [(ngModel)]="userValue" name="user-input" matInput
+        placeholder="Tera is not listening you ...!!!" value=""> -->
     </mat-form-field>
   </form>
 

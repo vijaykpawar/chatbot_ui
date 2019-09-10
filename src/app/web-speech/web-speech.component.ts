@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { SpeechRecognizerService } from './shared/services/speech-recognizer.service';
 
 import { SpeechNotification } from './shared/model/speech-notification';
@@ -19,6 +19,10 @@ export class WebSpeechComponent implements OnInit {
   languages: string[] =  ['en-US', 'es-ES'];
   currentLanguage: string;
   actionContext: ActionContext = new ActionContext();
+  openChatBox:boolean = false;
+
+  @Output() ratingClicked: EventEmitter<string> =
+        new EventEmitter<string>();
 
   constructor(private changeDetector: ChangeDetectorRef,
               private speechRecognizer: SpeechRecognizerService,
@@ -30,6 +34,11 @@ export class WebSpeechComponent implements OnInit {
     this.speechRecognizer.initialize(this.currentLanguage);
     this.initRecognition();
     this.notification = null;
+  }
+
+  toggleChatBox(event) {
+    console.log('event clicked');
+    this.openChatBox = !this.openChatBox;
   }
 
   startButton(event) {
@@ -66,9 +75,16 @@ export class WebSpeechComponent implements OnInit {
         const message = data.content.trim();
         if (data.info === 'final_transcript' && message.length > 0) {
           this.finalTranscript = `${this.finalTranscript}\n${message}`;
+          console.log('Your speech = ', this.finalTranscript);
           this.actionContext.processMessage(message, this.currentLanguage);
           this.detectChanges();
           this.actionContext.runAction(message, this.currentLanguage);
+          console.log("before emiiting to parent "+this.finalTranscript);
+          //this.ratingClicked.emit(this.finalTranscript);
+          //document.getElementById("finalTranscript").value=this.finalTranscript;
+          (<HTMLInputElement>document.getElementById("finalTranscript")).value=this.finalTranscript;
+          this.finalTranscript="";
+          console.log("after emiiting to parent ")
         }
       });
 
@@ -98,6 +114,12 @@ export class WebSpeechComponent implements OnInit {
 
   detectChanges() {
     this.changeDetector.detectChanges();
+  }
+
+  onStop(event) {
+    /* console.log('Stoped clicked and final message = ', this.finalTranscript);
+    this.handleUserMesage(this.finalTranscript); */
+    console.log('On stop', event);
   }
 
 

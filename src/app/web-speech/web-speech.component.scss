@@ -18,6 +18,25 @@
   margin-right: 20px;
 }
 
+.chatbox-fab {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0 1rem 1rem 0;
+}
+
+.mic-style {
+  position: absolute;
+    bottom: 15px;
+    right: 80px;
+}
+
+.notification {
+  position: absolute;
+    bottom: 15px;
+    right: 130px;
+}
+
 .chatbox-container {
   width: 500px;
     height: 360px;
@@ -33,6 +52,7 @@
     flex-direction: column;
 
     .chatbox-body {
-      flex: 1
+      flex: 1;
+      overflow-y: auto;
     }
 }
